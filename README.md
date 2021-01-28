@@ -5,7 +5,7 @@ Forum App made with FLASK framework
 Installation (it is supposed you are in your user folder, otherise, first navigate to the project folder and just pass the first command from below):
 
 ```bash
-cd tp-flask/miniproject/
+cd tp-flask-miniproject/
 virtualenv env
 source env/bin/activate
 pip3 install -r requirements.txt
