@@ -2,6 +2,15 @@
 
 Forum App made with FLASK framework
 
+The webserver was made on Ubuntu 18.04 and on Windows Operational System this guide will be definitely useless,
+because there you should have many other things installed on your computer first and the commands are different.
+
+For the application we will need virtualenv environment installed, if you don't install it with:
+
+```bash
+pip3 install virtualenv 
+```
+
 Installation (it is supposed you are in your user folder, otherise, first navigate to the project folder and just pass the first command from below. The folder by default is called tp-flask-miniproject, but downloading the code
 will show it as tp-flask-miniproject-master after unzipping the archive with the project):
 
