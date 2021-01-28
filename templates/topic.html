@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}Topic{% endblock %}
+
+<!-- On every page of a given topic we will have the menu above for navigating, followed by the name of the
+topic and the other two components: its description and the datetime of creating it (the last is not mentioned
+in the exercise, but I added it, because if we have datetime for the posts, it will be good if we have for the
+topics too). After the information of the topic we have to show the information for every post. We have to show
+the next things - the content of the post, the datetime of posting it, the username of its author and the two
+buttons for updating and deleting the given post (for now just the delete button will work, the update button is
+up to my colleague from the team). At the end, if the user is active (this means he/she has just made a registration
+or he/she is logged in the forum), we have to show them the option to publish new posts. The new post will have CSRF
+token (token for Cross-Site Request Forgery, which is a kind of attack and this kind of attack is supported by Flask
+Security). If we have just a viewer of the topic, but not a user, this viewer will be able only to see the posts. -->
+
+{% block body %}
+<div class="pageTitle">
+    {{ topic.title }}
+</div>
+
+<div class="row pad">
+    <div class="col-lg-12">
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <strong>Description of the topic:</strong> {{ topic.description }}
+                    </div>
+                    <br/>
+                    <br/>
+                    <div class="col-lg-12">
+                        <br/>  <i class="glyphicon glyphicon-calendar"></i> 
+                        {{ topic.date_created.strftime('%d.%m.%Y, %H:%M:%S') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h2>All posts on this topic:</h2>
+{% for post in posts %}
+<div class="panel panel-primary post" id="r1" style="border-radius: 20px;">
+    <div class="panel-body">
+        <div class="row post">
+            <div class="col-lg-9">
+                <div class="post-content"> {{ post.content }} </div>
+            </div>
+            {% if current_user.active %}
+            <a href="/update/{{ post.id }}" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i> Update</a>
+            <a href="/delete/{{ post.id }}" class="btn btn-primary"><i class="glyphicon glyphicon-remove"></i> Delete</a>
+            {% endif %}
+            <br/>
+            <br/>
+            <br/>
+            <div class="col-lg-3">
+                <div class="post-details">
+                    <i class="glyphicon glyphicon-calendar"></i> {{ post.date_created.strftime('%d.%m.%Y, %H:%M:%S') }} &nbsp; <br />
+                    Posted by: {{ post.user.username }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+{% if current_user.active %}
+<div class="row pad">
+    <div class="col-lg-12 pad">
+        <div class="panel panel-primary">
+            <div class="panel-body pad" id="_post">
+                <form method="POST" role="form" id="theForm">
+                    {{ form.csrf_token }}
+                    <div class="form-group"> {{ form.content(class="form-control", rows="5") }} </div>
+                    <button type="submit" class="btn btn-primary"> <i class="glyphicon glyphicon-plus"></i> Add your new post </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>   
+{% endif %}                   
+{% endblock %}

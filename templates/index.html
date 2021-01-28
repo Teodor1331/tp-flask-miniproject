@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Topics{% endblock %}
+
+
+<!-- In the root page, as it is said in the exercise, we will have a list of all topics in the forum and
+button for adding a new topic just for the logged in users. If a given user is not logged in, then he/she
+will see just the topics without the button. After this we will have this list of posts, ordered in
+chronologial order from the oldest on top as the posts and for every topic we show the name of this topic
+and its description. Then, with the for loop we show this information on our forum for every topic one
+by one. Then we should manage the work of the button for adding the new topic. We have two options for it.
+The first one is to make absolutely a new route with another template for adding a new topic and the second
+one is to have a dialog window from modal type of CSS. In the application the second option is chosen, because
+it looks more practical and a little more beautiful this way. -->
+
+{% block body %}
+<div class="pageTitle">List of all topics</div>
+
+{% if current_user.active %}
+<div class="row">
+    <div class="col-lg-3">
+        <a href="#newModal" data-toggle="modal" class="btn btn-primary" title="Add Topic">
+            <i class="glyphicon glyphicon-pushpin"></i> Add a new topic </a>
+    </div>
+</div>
+{% endif %}
+
+<div class="row pad">
+    <div class="col-lg-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-lg-6"><i class="glyphicon glyphicon-star"></i> Name of the topic </div>
+                    <div class="col-lg-6"><i class="glyphicon glyphicon-info-sign"></i> Description of the topic </div>
+                </div>
+            </div>
+            {% for topic in topics %}
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h3 class="panel-title"> <a href="{{ url_for('topic', topic_id=topic.id) }}" style="font-size: 18px;" class="blue"> {{ topic.title }} </a> </h3>
+                    </div>
+                    <div class="col-lg-4">
+                        <p> <em> {{ topic.description }} </em> </p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="newModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Add topic</h4>
+            </div>
+            <div class="modal-body">
+                <form method="POST" role="form">
+                    {{ form.csrf_token }}
+                    <div class="form-group"> <label for="name">Topic Name</label> {{ form.title(class="form-control") }} </div>
+                    <div class="form-group"> <label for="description">Topic Description</label> {{ form.description(class="form-control") }} </div>
+                    <button type="submit" class="btn btn-primary">Add your new topic</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

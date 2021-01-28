@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Update{% endblock %}
+{% block content %}
+    <div class="container">
+        <h1>Update your post</h1>
+        <br/>
+        <form action="/update/{{ post_to_update.id }}" METHOD="POST">
+            <input type="text" placeholder="Content" name="content" value="{{ post_to_update.content }}">
+            <input type="submit" value="Update Post" class="btn btn-primary">
+        </form>
+    </div>
+{% endblock %}

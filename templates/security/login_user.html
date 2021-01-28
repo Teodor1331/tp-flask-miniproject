@@ -1,0 +1,32 @@
+{% extends "security/base.html" %}
+{% from "security/_macros.html" import render_field_with_errors %}
+{% from "security/_macros.html" import render_field %}
+
+{% block title %}Login{% endblock %}
+
+<!-- In the login page the application will want from the user the username and the password from
+his/her registration. When the user is logged in, the value of the active member for him will be True. 
+After entering the data, the user could simply press the Login button. The Flask Security supports
+the function to remember the username / email address (depends on the case) on the next login. 
+If the user has entered wrong data, there will be messages showing him why the entered data is wrong. 
+
+Here it is important to say that the token for the logged user will be active no more than 5 days. I
+haven't changed it in the configuration of the application and have used as it is by default. -->
+
+{% block body %}
+{% include "security/_messages.html" %}
+<div class="pageTitle">{{ _('Login') }}</div>
+
+<div class="row pad">
+    <div class="col-lg-10 col-lg-offset-1">
+        <form method="POST" action="{{ url_for_security('login') }}" name="login_user_form" role="form">
+            {{ login_user_form.hidden_tag() }}
+            <div class="form-group"> {{ render_field_with_errors(login_user_form.email, class="form-control") }} </div>
+            <div class="form-group"> {{ render_field_with_errors(login_user_form.password, class="form-control") }} </div>       
+            {{ render_field_with_errors(login_user_form.remember) }}
+            {{ render_field(login_user_form.next) }}
+            <div class="form-group"> {{ render_field(login_user_form.submit, class="btn btn-primary") }} </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
