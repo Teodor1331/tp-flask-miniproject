@@ -2,10 +2,11 @@
 
 Forum App made with FLASK framework
 
-Installation (it is supposed you are in your user folder, otherise, first navigate to the project folder and just pass the first command from below):
+Installation (it is supposed you are in your user folder, otherise, first navigate to the project folder and just pass the first command from below. The folder by default is called tp-flask-miniproject, but downloading the code
+will show it as tp-flask-miniproject-master after unzipping the archive with the project):
 
 ```bash
-cd tp-flask-miniproject/
+cd tp-flask-miniproject-master/
 virtualenv env
 source env/bin/activate
 pip3 install -r requirements.txt

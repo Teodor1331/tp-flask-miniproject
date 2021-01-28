@@ -11,3 +11,4 @@ Work of Teodor Dishanski:
 - the adding of a new post on every topic with the compulsory characteristics of how to be shown a post
 - all templates (base.html, index.html, topic.html, starting the update.html and the three templates in the security folder)
 - the "styles.css" file with the self-made CSS style
+- the description comments of what it is everything in the code
