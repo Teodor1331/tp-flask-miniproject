@@ -6,7 +6,7 @@ Work of Daniel Draganov:
 - the right work of the edit button and finishing the template update.html
 
 Work of Teodor Dishanski:
-- the registerstration of a user, login of a user and authentication of a user
+- the registration of a user, login of a user and authentication of a user
 - the adding of a new topic on the homepage with the added from the style characteristics of how to be shown a topic
 - the adding of a new post on every topic with the compulsory characteristics of how to be shown a post
 - all templates (base.html, index.html, topic.html, starting the update.html and the three templates in the security folder)
